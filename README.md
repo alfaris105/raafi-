@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Tracker Ninja 🕵️‍♂️</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="components/navbar.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <custom-navbar></custom-navbar>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Phone Tracker Ninja 🕵️‍♂️</h1>
+                <p class="text-gray-600">Find location by phone number with our powerful tracking tool</p>
+            </div>
+
+            <div class="bg-blue-50 rounded-lg p-6 mb-8">
+                <div class="flex items-center mb-4">
+                    <i data-feather="alert-triangle" class="text-yellow-500 mr-2"></i>
+                    <p class="text-sm text-gray-700">Note: This service requires permission from the phone owner for ethical tracking.</p>
+                </div>
+            </div>
+
+            <form id="trackerForm" class="space-y-6">
+                <div>
+                    <label for="phoneNumber" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-feather="phone" class="text-gray-400"></i>
+                        </div>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" 
+                               class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-3 border" 
+                               placeholder="+1 (555) 123-4567" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="reason" class="block text-sm font-medium text-gray-700 mb-1">Reason for Tracking</label>
+                    <select id="reason" name="reason" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md border p-3">
+                        <option value="family">Family Safety</option>
+                        <option value="device">Lost Device</option>
+                        <option value="business">Business Purpose</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center">
+                    <input id="consent" name="consent" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
+                    <label for="consent" class="ml-2 block text-sm text-gray-700">
+                        I confirm I have permission to track this phone number
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                    <i data-feather="map-pin" class="mr-2"></i> Track Location
+                </button>
+            </form>
+
+            <div id="resultContainer" class="hidden mt-8 p-6 bg-gray-50 rounded-lg">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Tracking Results</h3>
+                    <span id="statusBadge" class="px-2 py-1 text-xs font-semibold rounded-full"></span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-500 mb-2">Phone Information</h4>
+                        <div class="space-y-2">
+                            <p class="text-sm"><span class="font-medium">Number:</span> <span id="resultNumber"></span></p>
+                            <p class="text-sm"><span class="font-medium">Carrier:</span> <span id="resultCarrier"></span></p>
+                            <p class="text-sm"><span class="font-medium">Country:</span> <span id="resultCountry"></span></p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-500 mb-2">Location Details</h4>
+                        <div class="space-y-2">
+                            <p class="text-sm"><span class="font-medium">Coordinates:</span> <span id="resultCoordinates"></span></p>
+                            <p class="text-sm"><span class="font-medium">Address:</span> <span id="resultAddress"></span></p>
+                            <p class="text-sm"><span class="font-medium">Accuracy:</span> <span id="resultAccuracy"></span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <div id="mapPlaceholder" class="h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+                        <p class="text-gray-500">Map will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
